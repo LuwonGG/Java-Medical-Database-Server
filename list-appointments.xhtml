@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:metadata>
+  <f:event type="preRenderView" listener="#{appointmentController.loadAppointments()}"/>
+</f:metadata>
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Appointments Tracker</title>
+	
+	<h:outputStylesheet library="css" name="style.css"  />
+	
+</h:head>
+
+<h:body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>Chiropractic Practice</h2>
+		</div>
+	</div>
+
+	<div id="container">
+
+		<div id="content">
+		
+			<h:messages globalOnly="true" />
+			
+			<h:button value="Add Appointment" styleClass="add-appointment-button" outcome="appointment_form.xhtml"/>
+		
+			<h:form>
+						
+			<h:dataTable value="#{appointmentController.appointments}" var="tempAppointment"
+				styleClass="app-table" 
+				headerClass="app-table-header"
+				rowClasses="app-table-odd-row,app-table-even-row">
+
+				<h:column>
+					<f:facet name="header">First Name</f:facet>
+					#{tempAppointment.firstName}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Last Name</f:facet>
+					#{tempAppointment.lastName}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Date</f:facet>
+					#{tempAppointment.date}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">DX's</f:facet>
+					#{tempAppointment.dx_codes}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">CPT's</f:facet>
+					#{tempAppointment.cpt_codes}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Notes</f:facet>
+					#{tempAppointment.notes}
+				</h:column>
+
+			</h:dataTable>
+
+			</h:form>
+
+		</div>
+		
+	</div>
+
+</h:body>
+</html>

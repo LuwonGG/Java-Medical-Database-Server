@@ -1,0 +1,118 @@
+<!DOCTYPE xhtml>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+  		<f:event type="preRenderView" listener="#{appointmentController.loadAppointments()}"/>
+	</f:metadata>
+	
+    <h:head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+        <title>Add Appointments Form</title>
+
+		<h:outputStylesheet library="css" name="style.css"  />
+		<h:outputStylesheet library="css" name="add-appointment-style.css"  />
+		<h:outputStylesheet library="css" name="errors" 	/>
+	
+    </h:head>
+    
+    <!-- TO DO:
+    	1. Add CSS formatting to page to match rest of files.
+    	2. Add error CSS formatting
+    	3. Connect to SQL server database functionality.
+    	4. Add 'to excel' format functionality.
+     -->
+    
+    <h:body>
+    
+    	<div id="wrapper">
+			<div id="header">
+				<h2>Chiropractic Practice</h2>
+			</div>
+		</div>
+
+		<div id="container">
+			<h3>Add Appointment</h3>
+			
+			<h:messages globalOnly="true" />
+			
+			<h:form id="form" style="margin-top: 10px;" >
+				<h:panelGrid columns="3">
+			
+		    		<h:outputLabel>First Name: </h:outputLabel> <h:inputText value="#{appointments.firstName}"
+		    						 label="First Name"
+		    						 id="first_name"
+		    						 required="true"
+		    						 requiredMessage="  A first name is mandatory."/>
+		    						<h:message for="first_name" styleClass="error" />
+
+					<h:outputLabel>Last Name: </h:outputLabel> <h:inputText value = "#{appointments.lastName}" 
+									label="Last Name"
+									id="last_name"
+									required="true"
+									requiredMessage="  A last name is mandatory."/>
+									<h:message for="last_name" styleClass="error" />
+
+					<h:outputLabel>Month: </h:outputLabel> <h:selectOneMenu value = "#{appointments.month}"
+									id="month" 
+									required="true"
+									requiredMessage="  Select a day value.">
+  										<f:selectItem itemValue="#{null}" itemLabel=" Select One " />  
+										<f:selectItems value = "#{appointments.month_options}" />
+									</h:selectOneMenu>
+									<h:message for="month" styleClass="error" />
+			 
+					<h:outputLabel>Day: </h:outputLabel> <h:selectOneMenu value = "#{appointments.day}"
+									id="day" >
+  										<f:selectItem itemValue="#{null}" itemLabel=" Select One " /> 
+										<f:selectItems value = "#{appointments.day_options}" />
+									</h:selectOneMenu>
+									<h:message for="day" styleClass="error" />
+				
+					<h:outputLabel>Year: </h:outputLabel> <h:selectOneMenu value = "#{appointments.year}"
+									id="year">
+ 		    							<f:selectItem itemValue="#{null}" itemLabel=" Select One " /> 
+										<f:selectItems value = "#{appointments.year_options}" />
+									</h:selectOneMenu>
+									<h:message for="day" styleClass="error" />
+			
+					<h:outputLabel>Diagnosis Codes: </h:outputLabel> <p:selectCheckboxMenu 
+									value="#{appointments.form_dx_codes}" 
+									label="DX's" 
+									id="dx_codes"
+									panelStyle="width:200px" >
+										<f:selectItems value="#{appointments.dxcode_options}" />
+									</p:selectCheckboxMenu>
+									<h:message for="dx_codes" styleClass="error" />
+			
+					<h:outputLabel>Procedural Codes: </h:outputLabel> <p:selectCheckboxMenu 
+									value = "#{appointments.form_cpt_codes}" 
+									label="CPT's" 
+									id="cpt_codes"
+									panelStyle="width:200px" >
+										<f:selectItems value = "#{appointments.cptcode_options}" />
+									</p:selectCheckboxMenu>
+									<h:message for="cpt_codes" styleClass="error" />
+									
+					<h:outputLabel>Notes: </h:outputLabel> <p:inputText value="#{appointments.notes}"
+									label="Notes"
+									id="notes"
+									required="false" /> 
+									<h:message for="notes" styleClass="error" />
+					<br/>
+					<h:outputLabel /> 
+					<h:commandButton value="Submit" styleClass="submit" action="#{appointmentController.addAppointment(appointments)}"/>
+				</h:panelGrid>
+			</h:form>
+			
+			<div style="clear: both;"></div>
+			<p><h:outputLink value="list-appointments.xhtml">Back to List</h:outputLink></p>
+		</div>
+    </h:body>
+</html>

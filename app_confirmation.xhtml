@@ -1,0 +1,22 @@
+<!DOCTYPE xhtml>
+	<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <h:head>
+    	<title>Form Confirmation</title>
+    </h:head>
+    <body>
+    
+    	<h3>The appointment for #{appointments.firstName} #{appointments.lastName} has been entered!</h3>
+    	<hr size="1" width="100%" align="center"></hr>
+    	<div>
+    		First Name: #{appointments.firstName} <br/>
+    		Last Name: #{appointments.lastName} <br/>
+    		Date of App.: #{appointments.month} / #{appointments.day} / #{appointments.year} <br/>
+    		Diagnosis Codes: #{appointments.form_dx_codes}<br/>
+    		Procedural Codes: #{appointments.form_cpt_codes}<br/>
+    	</div>
+    </body>
+  </html>
